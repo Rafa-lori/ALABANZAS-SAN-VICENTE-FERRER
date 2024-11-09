@@ -1,0 +1,21 @@
+{
+  "name": "Alabanzas San Vicente Ferrer",
+  "short_name": "ALABANZA SVF",
+  "description": "Alabad al Señor, sus grandezas cantad.",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0404e2",
+  "icons": [
+    {
+      "src": "Logos/Logo Parroquia.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "Logos/Logo Parroquia.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
