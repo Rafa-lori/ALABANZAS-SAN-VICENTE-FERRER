@@ -140,6 +140,31 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
         }
+
+        body {
+  font-size: 16px;
+  background-color: #f0f0f0;
+}
+
+/* Media query para pantallas más pequeñas (móviles) */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px; /* Cambia el tamaño de la fuente en pantallas pequeñas */
+    background-color: #ffffff; /* Cambia el fondo */
+  }
+
+  /* Otros estilos específicos para móviles */
+  header {
+    padding: 10px;
+  }
+}
+
+/* Media query para pantallas muy pequeñas (dispositivos pequeños o móviles en vertical) */
+@media (max-width: 480px) {
+  body {
+    font-size: 12px; /* Cambia aún más el tamaño de la fuente en pantallas muy pequeñas */
+  }
+}
     </style>
 </head>
 <body>
