@@ -164,16 +164,19 @@
   body {
     font-size: 12px; /* Cambia aún más el tamaño de la fuente en pantallas muy pequeñas */
   }
+  .main-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+    }
 }
 
 @media (min-width: 768px) {
             .menu {
                 display: block; /* El menú se muestra en pantallas grandes */
                 float: right;
-            }
-
-            .button-grid {
-                grid-template-columns: repeat(2, 1fr); /* Dos botones por fila en pantallas medianas */
             }
         }
     </style>
