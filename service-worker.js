@@ -1,11 +1,11 @@
 const CACHE_NAME = 'alabanzas-cache-v1';
 const urlsToCache = [
+  '/',
   '/index.html',
   '/style.css',
   '/app.js',
   '/manifest.json',
-  '/icon-192x192.png',
-  '/icon-512x512.png',
+  '/logo-parroquia.png', // Asegúrate de que el logo esté en la ruta correcta
   '/Contacto.html',
   '/Canciones.html',
   '/Fechas.html'
@@ -16,7 +16,11 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then((cache) => {
+        console.log('Service Worker: Archivos cacheados');
         return cache.addAll(urlsToCache);
+      })
+      .catch((err) => {
+        console.error('Error al cachear archivos:', err);
       })
   );
 });
@@ -47,7 +51,10 @@ self.addEventListener('fetch', (event) => {
           return cachedResponse;
         }
         // Si no está en la caché, realiza la solicitud de red
-        return fetch(event.request);
+        return fetch(event.request).catch((err) => {
+          console.error('Error en la solicitud de red:', err);
+        });
       })
   );
 });
+
