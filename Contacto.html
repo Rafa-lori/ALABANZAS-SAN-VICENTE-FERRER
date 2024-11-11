@@ -1,115 +1,119 @@
-<!-- contacto.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacto - Alabanzas San Vicente Ferrer</title>
+    <title>Alabanzas San Vicente Ferrer</title>
+    <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Estilos generales */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-            background-image: url('Fonde de pantalla ppal.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-        }
-
-        header {
+        /* Estilos generales del encabezado */
+        .header {
             background-color: #003366;
             color: white;
-            padding: 15px 10px;
-            text-align: center;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
+        /* Estilo para el título */
+        .header-title {
+            flex-grow: 1;
+            text-align: center;
+            font-size: 1.5em;
+        }
+
+        /* Estilos para el menú desplegable */
         .menu {
-            display: none; /* Menú oculto por defecto */
+            position: relative;
+            display: inline-block;
         }
 
         .menu-button {
             background-color: #4A708B;
             color: white;
-            padding: 10px;
+            padding: 8px;
             border: none;
             cursor: pointer;
-            font-size: 1.2em;
-            display: block;
-            width: 100%;
+            font-size: 1em;
         }
 
         .menu-content {
-            display: block;
-            background-color: #fff;
+            display: none;
             position: absolute;
-            width: 100%;
+            left: 0;
+            background-color: white;
+            min-width: 150px;
             box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
         }
 
         .menu-content a {
             color: black;
-            padding: 12px;
+            padding: 12px 16px;
             text-decoration: none;
             display: block;
-            text-align: center;
         }
 
         .menu-content a:hover {
             background-color: #f1f1f1;
         }
 
+        /* Mostrar el menú al pasar el cursor */
+        .menu:hover .menu-content {
+            display: block;
+            background-color: #6CA6CD;
+        }
+
         /* Estilos para el contenido principal */
         .main-content {
             display: flex;
-            flex-direction: column;
+            flex-direction: row;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
             padding: 20px;
-            text-align: center;
         }
 
+        /* Estilo para la columna de contacto */
         .contact-details {
-            background-color: #fff;
+            flex: 1;
             padding: 20px;
-            margin: 10px;
-            border-radius: 5px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 500px;
+            text-align: left;
+            font-size: 1.1em;
             color: #333;
+            max-width: 400px;
         }
 
         .contact-details h2 {
-            color: #003366;
-            font-size: 2em;
+            color: #3f72af;
+            text-decoration: underline;
+            font-size: 1.8em;
             margin-bottom: 20px;
         }
 
-        .contact-details p {
-            font-size: 1.1em;
+        .contact-details p,
+        .contact-details a {
             margin: 10px 0;
         }
 
-        .contact-details a {
-            color: #003366;
+        a {
+            color: #3f72af;
             text-decoration: none;
             font-weight: bold;
         }
 
-        .contact-details a:hover {
+        a:hover {
             color: #112d4e;
         }
 
+        /* Botón de enlace a Google Maps */
         .map-link {
             display: inline-block;
             margin-top: 20px;
             padding: 10px 20px;
-            background-color: #003366;
-            color: white;
+            background-color: #3f72af;
+            color: #ffffff;
             text-decoration: none;
             border-radius: 5px;
             transition: background-color 0.3s;
@@ -119,44 +123,83 @@
             background-color: #112d4e;
         }
 
-        /* Imagen de la parroquia */
+        /* Imagen en la derecha */
         .parroquia-img {
-            max-width: 90%;
-            margin-top: 20px;
-            border-radius: 5px;
+            flex: 1;
+            width: 100%;
+            max-width: 350px;
             height: auto;
+            margin-left: 40px; /* Separación entre texto e imagen */
         }
 
-        /* Media query para pantallas grandes (más de 768px) */
-        @media (min-width: 768px) {
-            .main-content {
-                flex-direction: row;
-                justify-content: flex-start;
-                align-items: flex-start;
-                gap: 20px;
+        /* Fondo de pantalla */
+        body {
+            background-image: url('Fonde de pantalla ppal.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        body {
+  font-size: 16px;
+  background-color: #f0f0f0;
+}
+
+/* Media query para pantallas más pequeñas (móviles) */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px; /* Cambia el tamaño de la fuente en pantallas pequeñas */
+    background-color: #ffffff; /* Cambia el fondo */
+  }
+
+  /* Otros estilos específicos para móviles */
+  header {
+    padding: 10px;
+  }
+}
+
+/* Media query para pantallas muy pequeñas (dispositivos pequeños o móviles en vertical) */
+@media (max-width: 480px) {
+  body {
+    font-size: 12px; /* Cambia aún más el tamaño de la fuente en pantallas muy pequeñas */
+  }
+}
+
+@media (min-width: 768px) {
+            .menu {
+                display: block; /* El menú se muestra en pantallas grandes */
+                float: right;
             }
 
-            .contact-details {
-                max-width: 400px;
-                text-align: left;
-            }
-
-            .parroquia-img {
-                max-width: 350px;
-                margin-top: 0;
+            .button-grid {
+                grid-template-columns: repeat(2, 1fr); /* Dos botones por fila en pantallas medianas */
             }
         }
     </style>
 </head>
 <body>
     <!-- Encabezado -->
-    <header>
-        <h1>ALABANZAS SAN VICENTE FERRER</h1>
+    <header class="header">
+        <!-- Menú desplegable -->
+        <div class="menu">
+            <button class="menu-button">Menú</button>
+            <div class="menu-content">
+                <a href="index.html">Inicio</a>
+                <a href="Canciones.html">Canciones</a>
+                <a href="Fechas.html">Fechas</a>
+                <a href="Contacto.html">Contacto</a>
+            </div>
+        </div>
+        
+        <!-- Título centrado -->
+        <h1 class="header-title">ALABANZAS SAN VICENTE FERRER</h1>
+        <img src="logo-parroquia.png" alt="Logo de la Parroquia" class="header-logo">
     </header>
 
     <!-- Contenido principal -->
-    <main class="main-content">
-        <!-- Detalles de contacto -->
+    <main class="main-content" id="inicio">
+        <!-- Detalles de contacto a la izquierda -->
         <div class="contact-details">
             <h2>CONTACTO</h2>
             <p><strong>Teléfono:</strong> 957 25 00 44</p> 
@@ -167,18 +210,11 @@
             </a>
         </div>
 
-        <!-- Imagen de la parroquia -->
+        <!-- Imagen a la derecha -->
         <img src="parroquia.png" alt="Imagen de la Parroquia" class="parroquia-img">
     </main>
 
-    <!-- Menú móvil -->
-    <div class="menu">
-        <button class="menu-button">Menú</button>
-        <div class="menu-content">
-            <a href="index.html">Inicio</a>
-            <a href="Canciones.html">Canciones</a>
-            <a href="Fechas.html">Fechas</a>
-        </div>
-    </div>
+    <!-- Archivo JavaScript -->
+    <script src="app.js"></script>
 </body>
 </html>
