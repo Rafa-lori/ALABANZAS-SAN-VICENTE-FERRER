@@ -2,7 +2,7 @@
   "name": "Alabanzas San Vicente Ferrer",
   "short_name": "ALABANZA SVF",
   "description": "Alabad al Señor, sus grandezas cantad.",
-  "start_url": "index.html",
+  "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#0404e2",

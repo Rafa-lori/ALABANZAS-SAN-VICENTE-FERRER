@@ -1,9 +1,14 @@
-const CACHE_NAME = 'mi-pwa-cache-v1';
+const CACHE_NAME = 'alabanzas-cache-v1';
 const urlsToCache = [
-  'index.html',
-  'style.css',
-  'app.js',
-  'manifest.json'
+  '/index.html',
+  '/style.css',
+  '/app.js',
+  '/manifest.json',
+  '/icon-192x192.png',
+  '/icon-512x512.png',
+  '/Contacto.html',
+  '/Canciones.html',
+  '/Fechas.html'
 ];
 
 // Instalar el Service Worker
