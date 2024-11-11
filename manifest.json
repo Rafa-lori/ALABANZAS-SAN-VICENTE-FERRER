@@ -1,8 +1,8 @@
 {
   "name": "Alabanzas San Vicente Ferrer",
   "short_name": "Alabanzas",
-  "start_url": "/",
-  "scope": "/",
+  "start_url": "/https://alabanzas-san-vicente-ferrer-hoyd.vercel.app/",
+  "scope": "/https://alabanzas-san-vicente-ferrer-hoyd.vercel.app/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#003366",
