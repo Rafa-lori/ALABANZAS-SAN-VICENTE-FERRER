@@ -68,27 +68,25 @@
             background-color: #6CA6CD;
         }
 
-        /* Estilos para el contenido principal */
+        /* Asegúrate de que el título y los botones están correctamente alineados */
         .main-content {
             display: flex;
-            justify-content: center;
+            flex-direction: column; /* Coloca el título y los botones en una columna */
             align-items: center;
-            flex-direction: column;
-            text-align: center;
             padding: 20px;
-            position: relative;
+            text-align: center;
+        }
+
+        .main-content h2 {
+            margin-bottom: 20px; /* Añade espacio entre el título y los botones */
+            text-decoration: underline;
         }
 
         .button-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-template-rows: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr); /* Mantén el diseño de cuadrícula en pantallas grandes */
             gap: 20px;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80%;
+            width: 100%; /* Asegura que ocupe todo el ancho en móviles */
             max-width: 800px;
         }
 
@@ -160,31 +158,35 @@
         }
 
         body {
-  font-size: 16px;
-  background-color: #f0f0f0;
-}
+        font-size: 16px;
+         background-color: #f0f0f0;
+        }
 
-/* Media query para pantallas más pequeñas (móviles) */
-@media (max-width: 768px) {
-  body {
-    font-size: 14px; /* Cambia el tamaño de la fuente en pantallas pequeñas */
-    background-color: #ffffff; /* Cambia el fondo */
-  }
+        /* Media query para pantallas más pequeñas (móviles) */
+        @media (max-width: 768px) {
+        body {
+            font-size: 14px; /* Cambia el tamaño de la fuente en pantallas pequeñas */
+            background-color: #ffffff; /* Cambia el fondo */
+        }
 
-  /* Otros estilos específicos para móviles */
-  header {
-    padding: 10px;
-  }
-}
+        /* Otros estilos específicos para móviles */
+        header {
+            padding: 10px;
+        }
+        }
 
-/* Media query para pantallas muy pequeñas (dispositivos pequeños o móviles en vertical) */
-@media (max-width: 480px) {
-  body {
-    font-size: 12px; /* Cambia aún más el tamaño de la fuente en pantallas muy pequeñas */
-  }
-}
+        /* Media query para pantallas muy pequeñas (dispositivos pequeños o móviles en vertical) */
+        @media (max-width: 480px) {
+        body {
+            font-size: 12px; /* Cambia aún más el tamaño de la fuente en pantallas muy pequeñas */
+        }
+        .button-grid {
+            grid-template-columns: 1fr; /* Cambia a una sola columna en pantallas muy pequeñas */
+            gap: 10px;
+        }
+        }
 
-@media (min-width: 768px) {
+        @media (min-width: 768px) {
             .menu {
                 display: block; /* El menú se muestra en pantallas grandes */
                 float: right;
@@ -192,7 +194,9 @@
 
             .button-grid {
                 grid-template-columns: repeat(2, 1fr); /* Dos botones por fila en pantallas medianas */
+                gap: 10px;
             }
+
         }
     </style>
 </head>
