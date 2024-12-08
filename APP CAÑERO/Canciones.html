@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Canciones - Alabanzas San Vicente Ferrer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <style>
+        /* Estilos generales del encabezado */
+        .header {
+            background-color: #003366;
+            color: white;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Estilo para el título */
+        .header-title {
+            flex-grow: 1;
+            text-align: center;
+            font-size: 1.5em;
+        }
+
+        h2 {
+            text-decoration: underline;
+        }
+
+        /* Estilos para el menú desplegable */
+        .menu {
+            position: relative;
+            display: inline-block;
+        }
+
+        .menu-button {
+            background-color: #4A708B;
+            color: white;
+            padding: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .menu-content {
+            display: none;
+            position: absolute;
+            left: 0;
+            background-color: white;
+            min-width: 150px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .menu-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .menu-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .menu:hover .menu-content {
+            display: block;
+            background-color: #6CA6CD;
+        }
+
+        /* Asegúrate de que el título y los botones están correctamente alineados */
+        .main-content {
+            display: flex;
+            flex-direction: column; /* Coloca el título y los botones en una columna */
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .main-content h2 {
+            margin-bottom: 20px; /* Añade espacio entre el título y los botones */
+            text-decoration: underline;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Mantén el diseño de cuadrícula en pantallas grandes */
+            gap: 20px;
+            width: 100%; /* Asegura que ocupe todo el ancho en móviles */
+            max-width: 800px;
+        }
+
+        .button {
+            background-color: #4A708B;
+            color: white;
+            font-size: 1em;
+            border: none;
+            border-radius: 50%;
+            padding: 20px;
+            cursor: pointer;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #6CA6CD;
+        }
+
+        /* Estilo para la pantalla completa con la letra */
+        .fullscreen-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.9); /* Fondo negro */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            overflow: hidden; /* Evita que la página se desborde */
+        }
+
+        /* Estilo para la letra de la canción */
+        .song-text {
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: 2em;
+            text-align: center;
+            max-width: 90%;
+            padding: 20px;
+            overflow-y: auto;
+            height: 80vh; /* Altura ajustada para que no se desborde de la pantalla */
+            position: relative;
+        }
+
+        /* Botón para cerrar la vista de la canción */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 2em; /* Tamaño reducido de la "X" */
+            cursor: pointer;
+        }
+
+        body {
+            background-image: url('Fonde de pantalla ppal.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        body {
+        font-size: 16px;
+         background-color: #f0f0f0;
+        }
+
+        /* Media query para pantallas más pequeñas (móviles) */
+        @media (max-width: 768px) {
+        body {
+            font-size: 14px; /* Cambia el tamaño de la fuente en pantallas pequeñas */
+            background-color: #ffffff; /* Cambia el fondo */
+        }
+
+        /* Otros estilos específicos para móviles */
+        header {
+            padding: 10px;
+        }
+        }
+
+        /* Media query para pantallas muy pequeñas (dispositivos pequeños o móviles en vertical) */
+        @media (max-width: 480px) {
+        body {
+            font-size: 12px; /* Cambia aún más el tamaño de la fuente en pantallas muy pequeñas */
+        }
+        .button-grid {
+            grid-template-columns: 1fr; /* Cambia a una sola columna en pantallas muy pequeñas */
+            gap: 10px;
+        }
+        }
+
+        @media (min-width: 768px) {
+            .menu {
+                display: block; /* El menú se muestra en pantallas grandes */
+                float: right;
+            }
+
+            .button-grid {
+                grid-template-columns: repeat(2, 1fr); /* Dos botones por fila en pantallas medianas */
+                gap: 10px;
+            }
+
+        }
+    </style>
+</head>
+<body>
+    <!-- Encabezado -->
+    <header class="header">
+        <div class="menu">
+            <button class="menu-button">Menú</button>
+            <div class="menu-content">
+                <a href="index.html">Inicio</a>
+                <a href="Canciones.html">Canciones</a>
+                <a href="Fechas.html">Fechas</a>
+                <a href="Contacto.html">Contacto</a>
+            </div>
+        </div>
+        <h1 class="header-title">ALABANZAS SAN VICENTE FERRER</h1>
+        <img src="logo-parroquia.png" alt="Logo de la Parroquia" class="header-logo">
+    </header>
+
+    <!-- Contenido principal -->
+    <main class="main-content" id="Canciones">
+        <h2>CANCIONES</h2>
+        <div class="button-grid">
+            <button class="button" onclick="showSong('jesus-eucaristia')">Jesús Eucaristía</button>
+            <button class="button" onclick="showSong('cristo-reina')">Cristo Reina</button>
+            <button class="button" onclick="showSong('con-poder')">Con Poder</button>
+            <button class="button" onclick="showSong('a-danzar')">A Danzar</button>
+            <button class="button" onclick="showSong('trae-el-cielo-aqui')">Trae el Cielo Aquí</button>
+            <button class="button" onclick="showSong('yeshua')">Yeshuá</button>
+            <button class="button" onclick="showSong('yahveh')">Yahveh</button>
+            <button class="button" onclick="showSong('alfarero')">Alfarero</button>
+            <button class="button" onclick="showSong('mi-padre-me-ama')">Mi Padre me Ama</button>
+            <button class="button" onclick="showSong('milagroso')">Milagroso</button>
+            <button class="button" onclick="showSong('tu-el-unico-rey')">Tú el Único Rey</button>
+            <button class="button" onclick="showSong('obra-en-mi')">Obra en mí</button>
+            <button class="button" onclick="showSong('ven-ahora')">Ven ahora</button>
+            <button class="button" onclick="showSong('actua-en-mi')">Actúa en mí</button>
+            <button class="button" onclick="showSong('caminar-contigo-maria')">Caminar Contigo, María</button>
+        </div>
+    </main>
+
+    <!-- Script para mostrar la letra de la canción -->
+    <script>
+        function showSong(song) {
+            const songs = {
+                'jesus-eucaristia': `
+                    <div class="fullscreen-overlay">
+                        <div class="song-text">
+                            <button class="close-btn" onclick="window.location.reload();">X</button>
+                            <h2>Jesús Eucaristía</h2>
+                            <h3>VERSO</h3>
+                            <p>Ángeles bajando y llegando hasta el altar</p>
+                            <p>Se unen a adorar a Jesús Eucaristía</p>
+                            <p>Ángeles bajando y llegando hasta el altar</p>
+                            <p>Se unen a adorar a Jesús Eucaristía</p>
+
+                            <h3>CORO</h3>
+                            <p>Presencia real, Amor de los amores</p>
+                            <p>Jesús Eucaristía, Jesús el pan de vida</p>
+                            <p>Presencia real, Amor de los amores</p>
+                            <p>Jesús Eucaristía, Jesús el pan de vida</p>
+
+                            <h3>VERSO</h3>
+                            <p>Ángeles bajando y llegando hasta el altar</p>
+                            <p>Se unen a adorar a Jesús Eucaristía</p>
+
+                            <h3>PUENTE</h3>
+                            <p>Mi todo, mi fuerza, mi ayuda, mi esperanza</p>
+                            <p>Mi todo, mi fuerza, mi ayuda, mi esperanza</p>
+                        </div>
+                    </div>
+                `,
+
+                'cristo-reina': `
+                    <div class="fullscreen-overlay">
+                        <div class="song-text">
+                            <button class="close-btn" onclick="window.location.reload();">X</button>
+                            <h2>Crsito Reina</h2>
+                            <h3>VERSO</h3>
+                            <p>Mi corazón quiere alabar...    Alabarte</p>
+                            <p>Mi corazón quiere adorar...    Adorarte</p>
+                            <p>Mi corazón quiere alabar...    Alabarte</p>
+                            <p>Mi corazón quiere adorar...    Adorarte</p>
+
+                            <h3>CORO</h3>
+                            <p>Cristo reina</p>
+                            <p>Cristo reina</p>
+                            <p>Cristo reina</p>
+                            <p>Con poder (x2)</p>
+                        </div>
+                    </div>
+                `,
+
+                'con-poder': `
+                    <div class="fullscreen-overlay">
+                        <div class="song-text">
+                            <button class="close-btn" onclick="window.location.reload();">X</button>
+                            <h2>Con poder</h2>
+                            <h3>VERSO 1</h3>
+                            <p>Espíritu de Dios, llena todo este lugar</p>
+                            <p>desciende una vez más</p>
+
+                            <h3>CORO</h3>
+                            <p>Con poder, con poder</p>
+                            <p>desciende una vez más y llena este lugar</p>
+
+                            <h3>VERSO 2</h3>
+                            <p>Quiero ver gente alabar, quiero oir la gene hablar</p>
+                            <p>lenguas celestiales, sobrenaturales</p>
+
+                            <h3>VERSOS AÑADIDOS</h3>
+                            <p>La Tierra canta, el cielo adora</p>
+                            <p>y todos gritan que tú eres santo</p>
+                            <h3></h3>
+                            <p>Ángeles se unen hoy, cantamos a una sola voz</p>
+                            <p>¡SANTO! ¡SANTO!</p>
+                        </div>
+                    </div>
+                `,
+
+                'a-danzar': `
+                    <div class="fullscreen-overlay">
+                        <div class="song-text">
+                            <button class="close-btn" onclick="window.location.reload();">X</button>
+                            <h2>A Danzar</h2>
+                            <h3>VERSO</h3>
+                            <p>A danzar delante de su presencia, su amor es quien nos sustenta</p>
+                            <p>Él es DIos, Él es quien resucitó</p>
+                            <p>A danzar, a Dios vamos a adorar, su amor hay que celebrar</p>
+                            <p>Él es Dios, Él es quien resucitó</p>
+
+                            <h3>CORO 1</h3>
+                            <p>Da un paso al frente</p>
+                            <p>Haz algo diferente</p>
+                            <p>demos toda gloria a Jesús</p>
+                            
+                            <h3>CORO 2</h3>
+                            <p>Levanta tus manos</p>
+                            <p>grita que el es Santo</p>
+                            <p>es el gran yo soy, murió en la cruz</p>
+
+                            <h3>PUENTE</h3>
+                            <p>Si tú respiras tienes que adorar</p>
+                            <p>que nada te impida danzar...</p>
+                        </div>
+                    </div>
+                `,
+
+                'trae-el-cielo-aqui': `
+                    <div class="fullscreen-overlay">
+                        <div class="song-text">
+                            <button class="close-btn" onclick="window.location.reload();">X</button>
+                            <h2>Trae el cielo aquí</h2>
+                            <h3>VERSO 1</h3>
+                            <p>Ángeles del cielo vengan a cantar</p>
+                            <p>se escuchan sus voces en este lugar</p>
+                            <p>aunque parezca locura, aunque sé que no es normal</p>
+                            <p>por la fe, sucederán</p>
+
+                            <h3>VERSO 2</h3>
+                            <p>Cosas invisibles que nadie ha tocado</p>
+                            <p>sonidos del cielo que nadie ha escuchado</p>
+                            <p>cosas que no son normales, cosas sobrenaturales</p>
+                            <p>por la fe, sucederán</p>
+
+                            <h3>PUENTE</h3>
+                            <p>Abre nuestros ojos como Eliseo</p>
+                            <p>muéstranos el cielo, muéstranos el cielo</p>
+
+                            <h3>CORO 1</h3>
+                            <p>Inúndanos de tu Gloria, inúndanos de tu Gloria</p>
+                            <p>Trae aquí el cielo, trae aquí el cielo</p>
+
+                            <h3>CORO 2</h3>
+                            <p>Ante tu Gloria demonios caen</p>
+                            <p>huye la muerte, ya no hay enfermedad</p>
+                            <p>el cielo aquí está</p>
+                        </div>
+                    </div>
+                `,
+
+                'yeshua': `
+                    <div class="fullscreen-overlay">
+                        <div class="song-text">
+                            <button class="close-btn" onclick="window.location.reload();">X</button>
+                            <h2>Yeshuá</h2>
+                            <h3>VERSO 1</h3>
+                            <p>Mi orgullo me sacó del jardín, tu humildad puso el jardín en mí</p>
+                            <p>Si vendiera todo lo que tengo a cambio de su amor, yo fallaría</p>
+                            
+                            <h3>VERSO 2</h3>
+                            <p>Porque su amor no se compra ni se merece</p>
+                            <p>su amor es un regalo de gracia y se recibe</p>
+
+                            <h3>VERSO 3</h3>
+                            <p>Quiero conocer a Jesús, quiero conocer a Jesús</p>
+                            <p>quiero conocer a Jesús, quiero conocer a Jesús</p>
+                            
+                            <h3>PUENTE</h3>
+                            <p>Yeshu u u u á, a a a a, a a a a</p>
+
+                            <h3>CORO</h3>
+                            <p>Mi amado es el más bello en-tre</p>
+                            <p>millares y millares</p>
+                        </div>
+                    </div>
+                `,
+
+                'yahveh': `
+                    <div class="fullscreen-overlay">
+                        <div class="song-text">
+                            <button class="close-btn" onclick="window.location.reload();">X</button>
+                            <h2>Yahveh</h2>
+                            <h3>VERSO</h3>
+                            <p>Yahveh, Rapha, Elohim, Shadday</p>
+                            <p>Jireh, Adonai, se manifestará</p>
+
+                            <h3>CORO</h3>
+                            <p>No importa todo lo que cueste, tu presencia vale mucho más</p>
+                            <p>sólo quiero estar contigo una y otra y otra y otra vez</p>
+                        </div>
+                    </div>
+                `,
+
+                'alfarero': `
+                    <div class="fullscreen-overlay">
+                        <div class="song-text">
+                            <button class="close-btn" onclick="window.location.reload();">X</button>
+                            <h2>Alfarero</h2>
+                            <h3>VERSO</h3>
+                            <p>Rindo mi corazón como una ofrenda ante tus pies</p>
+                            <p>te entrego lo que soy a ti, maestro, moldéame</p>
+
+                            <h3>PUENTE</h3>
+                            <p>Yo soy el barro, tú el alfarero</p>
+                            <p>hazme de nuevo, hazme de nuevo</p>
+
+                            <h3>CORO</h3>
+                            <p>Hasta ver tu fuego arder</p>
+                            <p>te adoraré, te adoraré</p>
+                        </div>
+                    </div>
+                `,
+
+                'mi-padre-me-ama': `
+                    <div class="fullscreen-overlay">
+                        <div class="song-text">
+                            <button class="close-btn" onclick="window.location.reload();">X</button>
+                            <h2>Mi Padre me ama</h2>
+                            <h3>VERSO</h3>
+                            <p>Y yo sólo sé que yo soy su hijo</p>
+                            <p>y Él es mi Padre y mi Padre me ama</p>
+
+                            <h3>CORO</h3>
+                            <p>Ya no soy un esclavo del temor</p>
+                            <p>yo soy hijo de Dios</p>
+                        </div>
+                    </div>
+                `,
+
+                'milagroso': `
+                    <div class="fullscreen-overlay">
+                        <div class="song-text">
+                            <button class="close-btn" onclick="window.location.reload();">X</button>
+                            <h2>Milagroso</h2>
+                            <h3>VERSO 1</h3>
+                            <p>Aquí estás, te vemos mover, te adoraré, te adoraré</p>
+                            <p>Aquí estás, obrando en mí, te adoraré, te adoraré</p>
+
+                            <h3>CORO 1</h3>
+                            <p>Milagroso, abres caminos, cumples promesas</p>
+                            <p>luz en tinieblas, mi Dios, así eres Tú</p>
+
+                            <h3>VERSO 2</h3>
+                            <p>Aquí estás, sanando mi corazón, te adoraré, te adoraré</p>
+                            <p>Aquí estás, tocando mi corazón , te adoraré, te adoraré</p>
+
+                            <h3>CORO 2</h3>
+                            <p>Aunque no pueda ver estás obrando, auqnue no pueda ver estás obrando</p>
+                            <p>siempre estás, siempre estás obrando; siempre estás, siempre estás obrando</p>
+                        </div>
+                    </div>
+                `,
+
+                'tu-el-unico-rey': `
+                    <div class="fullscreen-overlay">
+                        <div class="song-text">
+                            <button class="close-btn" onclick="window.location.reload();">X</button>
+                            <h2>Tú, el único Rey</h2>
+                            <h3>VERSO 1</h3>
+                            <p>Tú el único Rey que tiene que reinar, el único Señor al que voy a adorar./p>
+                            <p>Hoy levanto el corazón a quien lo conquistó. Simplemente porque tú eres Dios.</p>
+
+                            <h3>CORO 1</h3>
+                            <p>Quiero ponerte por encima de todo, en cada momento sentarte en el trono.</p>
+                            <p>Que tu alabanza esté siempre en mi boca, y reconocer que tú eres Dios.</p>
+
+                            <h3>VERSO 2</h3>
+                            <p>Que alabarte a ti, Señor, sea siempre lo primero.</p>
+                            <p>Fijo mi mirada en el cielo.</p>
+                        </div>
+                    </div>
+                `,
+
+                'obra-en-mi': `
+                    <div class="fullscreen-overlay">
+                        <div class="song-text">
+                            <button class="close-btn" onclick="window.location.reload();">X</button>
+                            <h2>Obra en mí</h2>
+                            <h3>VERSO</h3>
+                            <p>Yahveh, Rapha, Elohim, Shadday</p>
+                            <p>Jireh, Adonai, se manifestará</p>
+
+                            <h3>CORO</h3>
+                            <p>No importa todo lo que cueste, tu presencia vale mucho más</p>
+                            <p>sólo quiero estar contigo una y otra y otra y otra vez</p>
+                        </div>
+                    </div>
+                `,
+
+                'ven-ahora': `
+                    <div class="fullscreen-overlay">
+                        <div class="song-text">
+                            <button class="close-btn" onclick="window.location.reload();">X</button>
+                            <h2>Ven ahora</h2>
+                            <h3>VERSO</h3>
+                            <p>Ven ahora (ven ahora)</p>
+                            <p>santo Espíritu (santo Espíritu)</p>
+                            <p>Ven y toma (ven y toma)</p>
+                            <p>tu lugar (tu lugar).</p>
+
+                            <h3>CORO</h3>
+                            <p>Somos Sión, Tú eres Rey</p>
+                            <p>ven y úngenos Señor.</p>
+                            <p>Ven ahora, ven a mí.</p>
+                        </div>
+                    </div>
+                `,
+
+                'actua-en-mi': `
+                    <div class="fullscreen-overlay">
+                        <div class="song-text">
+                            <button class="close-btn" onclick="window.location.reload();">X</button>
+                            <h2>Actúa en mí</h2>
+                            <h3>VERSO</h3>
+                            <p>Yahveh, Rapha, Elohim, Shadday</p>
+                            <p>Jireh, Adonai, se manifestará</p>
+
+                            <h3>CORO</h3>
+                            <p>No importa todo lo que cueste, tu presencia vale mucho más</p>
+                            <p>sólo quiero estar contigo una y otra y otra y otra vez</p>
+                        </div>
+                    </div>
+                `,
+
+                'caminar-contigo-maria': `
+                    <div class="fullscreen-overlay">
+                        <div class="song-text">
+                            <button class="close-btn" onclick="window.location.reload();">X</button>
+                            <h2>Caminar contigo, María</h2>
+                            <h3>VERSO 1</h3>
+                            <p>Quiero caminar contigo, María; pues tú eres mi madre, eres mi guía.</p>
+                            <p>Tú eres para mí el más grande ejemplo de santidad, de humildad.</p>
+
+                            <h3>VERSO 2</h3>
+                            <p>Quiero caminar contigo, María; no sólo un momento, todos los días.</p>
+                            <p>Necesito tu amor de madre, tu intercesión ante el Señor.</p>
+
+                            <h3>CORO 1</h3>
+                            <p>Guía mis pasos, llévame al cielo; bajo tu manto no tengo miedo.</p>
+                            <p>Llena de gracia, ave María; hoy yo te ofrezco toda mi vida.</p>
+                        </div>
+                    </div>
+                `,
+                // Agrega las otras canciones siguiendo el mismo formato
+            };
+
+            document.body.innerHTML = songs[song]; // Cambia el contenido de la página a la canción seleccionada
+        }
+    </script>
+</body>
+</html>
